@@ -20,7 +20,7 @@ public class SubmissionsController : ControllerBase
     {
         var submission = new Submission
         {
-            Data = JsonConvert.SerializeObject(formData)
+            Data = formData.ToString()
         };
         _context.Submissions.Add(submission);
         await _context.SaveChangesAsync();

@@ -1,14 +1,17 @@
 <template>
   <FormComponent msg="Welcome to Your Vue.js App"/>
+  <SubmissionsList msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
 import FormComponent from './components/FormComponent.vue'
+import SubmissionsList from './components/SubmissionsList.vue'
 
 export default {
   name: 'App',
   components: {
-    FormComponent
+    FormComponent,
+    SubmissionsList
   }
 }
 </script>

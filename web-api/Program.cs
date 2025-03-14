@@ -56,6 +56,8 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5173";
+app.Urls.Add($"http://0.0.0.0:{port}");
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

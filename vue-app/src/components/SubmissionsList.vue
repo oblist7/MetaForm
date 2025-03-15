@@ -1,13 +1,16 @@
 <template>
-    <div class="list-container">
-        <h2>Submissions</h2>
-        <div class="search">
-            <input v-model="searchField" placeholder="Field (e.g., name)" />
-            <input v-model="searchValue" placeholder="Value (e.g., John)" />
-            <button @click="searchSubmissions">Search</button>
+    <div class="container">
+        <h2 class="mb-2">Submissions</h2>
+
+        <label class="form-label">Search:</label>
+        <div class="input-group">
+            <input v-model="searchField" class="form-control form-control-sm" placeholder="Field (e.g., name)" />
+            <input v-model="searchValue" class="form-control form-control-sm" placeholder="Value (e.g., John)" />
+            <button @click="searchSubmissions" class="btn btn-primary">Search</button>
         </div>
-        <ul>
-            <li v-for="submission in submissions" :key="submission.id">
+
+        <ul class="list-group">
+            <li v-for="submission in submissions" :key="submission.id" class="list-group-item">
                 <pre>{{ JSON.parse(submission.data) }}</pre>
             </li>
         </ul>
@@ -15,7 +18,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
     data() {
@@ -23,65 +26,26 @@ export default {
             submissions: [],
             searchField: '',
             searchValue: ''
-        };
+        }
     },
     async created() {
-        await this.fetchSubmissions();
+        await this.fetchSubmissions()
     },
     methods: {
         async fetchSubmissions() {
-            const response = await axios.get('/api/submissions');
-            this.submissions = response.data;
+            const response = await axios.get('/api/submissions')
+            this.submissions = response.data
         },
         async searchSubmissions() {
             if (!this.searchField || !this.searchValue) {
-                await this.fetchSubmissions();
-                return;
+                await this.fetchSubmissions()
+                return
             }
             const response = await axios.get('/api/submissions/search', {
                 params: { field: this.searchField, value: this.searchValue }
-            });
-            this.submissions = response.data;
+            })
+            this.submissions = response.data
         }
     }
-};
+}
 </script>
-
-<style scoped>
-.list-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-}
-
-.search {
-    margin-bottom: 20px;
-}
-
-.search input {
-    padding: 8px;
-    margin-right: 10px;
-}
-
-button {
-    padding: 8px 16px;
-    background: #007bff;
-    color: white;
-    border: none;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-pre {
-    margin: 0;
-}
-</style>

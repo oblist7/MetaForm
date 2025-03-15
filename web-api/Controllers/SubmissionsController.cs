@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 
@@ -18,10 +17,12 @@ public class SubmissionsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateSubmission([FromBody] object formData)
     {
+#pragma warning disable CS8601 // Possible null reference assignment.
         var submission = new Submission
         {
             Data = formData.ToString()
         };
+#pragma warning restore CS8601 // Possible null reference assignment.
         _context.Submissions.Add(submission);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetSubmission), new { id = submission.Id }, submission);

@@ -4,7 +4,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5173',
+        target: 'http://backend:5173',
         changeOrigin: true,
         secure: false
       }
@@ -13,10 +13,4 @@ module.exports = defineConfig({
   css: {
     extract: true
   }
-  // configureWebpack: {
-  //   output: {
-  //     filename: 'js/app.js', // Single JS file for production
-  //     chunkFilename: 'js/app.js'
-  //   }
-  // }
 })

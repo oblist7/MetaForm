@@ -10,7 +10,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - PORT=5173
+      - ASPNETCORE_URLS=http://0.0.0.0:5173
     restart: always
+    networks:
+      - app-network
 
   frontend:
     build:
@@ -21,3 +24,9 @@ services:
     depends_on:
       - backend
     restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

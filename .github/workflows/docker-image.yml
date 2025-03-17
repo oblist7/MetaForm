@@ -26,10 +26,12 @@ jobs:
 
       - name: Build and push backend image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/backend:latest ./web-api
-          docker push ghcr.io/${{ github.repository }}/backend:latest
+          REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          docker build -t ghcr.io/$REPO_NAME/backend:latest ./web-api
+          docker push ghcr.io/$REPO_NAME/backend:latest
 
       - name: Build and push frontend image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/frontend:latest ./vue-app
-          docker push ghcr.io/${{ github.repository }}/frontend:latest
+          REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          docker build -t ghcr.io/$REPO_NAME/frontend:latest ./vue-app
+          docker push ghcr.io/$REPO_NAME/frontend:latest
